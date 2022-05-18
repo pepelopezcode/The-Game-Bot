@@ -19,7 +19,7 @@ function Login(){
             }),
         })
             .then((r) => r.json())
-            .then(data => data.error == 'Invalid email or password'  ? alert(data.error):console.log(data) )
+            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):console.log(data) )
             
     }
 
