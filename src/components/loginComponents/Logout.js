@@ -1,14 +1,11 @@
 import React from 'react';
 
 
-function Logout(){
+function Logout({setLoggedIn}){
 
     function logoutFunc(){
-        fetch("http://localhost:3000/logout", {
-            method: "DELETE",
-        })
-        ;
-
+        localStorage.removeItem('Token')
+        setLoggedIn(false)
     }
     return (
         <><button  onClick={() => logoutFunc()} >Logout</button></>

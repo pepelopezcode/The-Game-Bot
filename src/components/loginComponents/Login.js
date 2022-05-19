@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 
-function Login(){
+function Login({setLoggedIn}){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -19,7 +19,7 @@ function Login(){
             }),
         })
             .then((r) => r.json())
-            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):console.log(data) )
+            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (setLoggedIn(true))) )
             
     }
 
