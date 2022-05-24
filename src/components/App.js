@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Signup from './loginComponents/Signup';
 import Login from './loginComponents/Login'
-import Logout from './loginComponents/Logout';
+
+import Home from './Home';
 
 function App() {
   const [user, setUser] = useState(null)
   const [loggedIn, setLoggedIn] = useState(false)
+  const [signupSwitch, setSignupSwitch] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem("Token")
-    console.log(token)
     if (token) {
       fetch("http://localhost:3000/me", {
         method: "GET",
@@ -28,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {loggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <Login setLoggedIn={setLoggedIn} />}
+        {loggedIn ? <Home setLoggedIn={setLoggedIn} /> :(signupSwitch ? <Signup setSignupSwitch={setSignupSwitch} /> :<Login setLoggedIn={setLoggedIn} setSignupSwitch={setSignupSwitch}/> )   }
         
         
       </header>

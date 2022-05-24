@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 
 
-function Signup(){
+function Signup({setSignupSwitch}){
     
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -63,6 +63,7 @@ function Signup(){
                 <input type="submit" className="submitButton" />
                 
             </form>
+            <p onClick={() => setSignupSwitch(false)} >Already have an account?</p>
         </>
     )
 }

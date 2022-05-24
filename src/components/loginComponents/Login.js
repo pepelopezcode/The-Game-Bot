@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 
-function Login({setLoggedIn}){
+function Login({setLoggedIn, setSignupSwitch}){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -44,6 +44,7 @@ function Login({setLoggedIn}){
                     
                     <input type="submit" className="submitButton" />
                 </form>
+                <p onClick={() => setSignupSwitch(true)} >Signup</p>
         </>
     )
 }
