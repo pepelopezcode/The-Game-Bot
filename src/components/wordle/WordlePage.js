@@ -12,6 +12,7 @@ function WordlePage() {
         ["", "", "", "", ""]];
     const [board, setBoard] = useState(boardDefault)
     const [currentWord, setCurrentWord] = useState({ currentAttempt: 0, currentLetter: 0 })
+    const wordAnswer = 'RIGHT'
 
 
     function onKeySelect(keyValue){
@@ -39,7 +40,7 @@ function WordlePage() {
     <div>
         <h1>WordlePage</h1>
         <div className="game" >
-            <WordleBoard board={board} />
+            <WordleBoard board={board} currentWord={currentWord} wordAnswer={wordAnswer} />
             <WordleKeyboard onEnter={onEnter} onDelete={onDelete} onKeySelect={onKeySelect} />
         </div>
         

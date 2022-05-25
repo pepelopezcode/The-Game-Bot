@@ -39,7 +39,7 @@ function WordleKeyboard({ onEnter, onDelete, onKeySelect }) {
   }, [handleKeyboardPress])
 
   return (
-    <div className='keyboard' onKeydown={(e) => handleKeyboardPress(e)}> 
+    <div className='keyboard' onKeyDown={(e) => handleKeyboardPress(e)}> 
       <div className='line1'>{firstRowOfKeys.map(keyboardLetter => {
         return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} />)
       })}</div>
