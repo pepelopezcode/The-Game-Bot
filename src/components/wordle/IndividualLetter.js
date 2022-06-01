@@ -9,7 +9,7 @@ function IndividualLetter({xPosition, yPosition, board, currentWord, wordAnswer}
     const letterBoxColor = currentWord.currentAttempt > yPosition && 
     (correctLetter ? "correct" : almostRightLetter ?  "almost" : "error")
   return (
-    <div className='letter' id={letterBoxColor} >{letter}</div>
+    <div className='letter' id={letterBoxColor.toString()} >{letter}</div>
   )
 }
 

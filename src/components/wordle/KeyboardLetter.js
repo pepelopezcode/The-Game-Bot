@@ -13,7 +13,7 @@ function KeyboardLetter({keyboardLetter, onEnter, onDelete, onKeySelect}) {
     }
     
   return (
-    <div className="key"  onClick={onKeyClick} >{keyboardLetter}</div>
+    <div className="key" id={keyboardLetter === "ENTER" || keyboardLetter === "DELETE" ? "big" : null} onClick={onKeyClick} >{keyboardLetter}</div>
   )
 }
 
