@@ -3,11 +3,11 @@ import React from 'react';
 import Logout from './loginComponents/Logout';
 import WordlePage from './wordle/WordlePage';
 
-function Home({setLoggedIn}){
+function Home(){
     return (
         <>
-        <Logout setLoggedIn={setLoggedIn} />
-        <WordlePage />
+        <Logout  />
+        
         </>
     )
 }

@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 
 
 
-function Signup({setSignupSwitch}){
+function Signup(){
+    const navigate = useNavigate()
     
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
-    //handles the user creation
+    
     function submitUser(e){
         e.preventDefault()
         fetch("http://localhost:3000/user",{
@@ -25,7 +27,26 @@ function Signup({setSignupSwitch}){
             }),
         })
             .then(r => r.json())
-            .then(data => data.errors ? alert(data.errors) :console.log(data))
+            .then(data => data.errors ? alert(data.errors) : login())
+    }
+
+    function login() {
+        fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email,
+                password
+            }),
+        })
+            .then((r) => r.json())
+            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/"))) )
+    }
+
+    function switchToLogin(){
+        navigate("/login")
     }
 
     return(
@@ -63,7 +84,7 @@ function Signup({setSignupSwitch}){
                 <input type="submit" className="submitButton" />
                 
             </form>
-            <p onClick={() => setSignupSwitch(false)} >Already have an account?</p>
+            <p onClick={() => switchToLogin()} >Already have an account?</p>
         </>
     )
 }

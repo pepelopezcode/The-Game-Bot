@@ -4,8 +4,12 @@ import Signup from './loginComponents/Signup';
 import Login from './loginComponents/Login'
 
 import Home from './Home';
+import { Route, Routes } from 'react-router-dom';
+import WordlePage from './wordle/WordlePage';
+import {useNavigate} from 'react-router-dom'
 
 function App() {
+  const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [loggedIn, setLoggedIn] = useState(false)
   const [signupSwitch, setSignupSwitch] = useState(false)
@@ -15,24 +19,36 @@ function App() {
     if (token) {
       fetch("http://localhost:3000/me", {
         method: "GET",
-        headers: { Authorization: "Bearer " + token}
+        headers: { Authorization: "Bearer " + token }
       })
         .then(response => response.json())
         .then(data => setUser(data))
-      setLoggedIn(true)
+      navigate("/")
+    }else {
+      navigate("/login")
     }
 
   }, []);
 
-  
+
 
   return (
     <div className="App">
-      <header className="App-header">
-        {loggedIn ? <Home setLoggedIn={setLoggedIn} /> :(signupSwitch ? <Signup setSignupSwitch={setSignupSwitch} /> :<Login setLoggedIn={setLoggedIn} setSignupSwitch={setSignupSwitch}/> )   }
+      
+      <Routes >
+        <Route exact path="/" element={<Home />}/>
+          
+        <Route exact path="/login" element={<Login  /> } />
+          
+        <Route exact path="/wordle" element={<WordlePage user={user} />} />
+
+        <Route exact path="/signup" element={<Signup  />} />
+          
         
-        
-      </header>
+      </Routes>
+
+
+
     </div>
   );
 }

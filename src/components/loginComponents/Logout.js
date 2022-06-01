@@ -1,11 +1,13 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom'
 
 
-function Logout({setLoggedIn}){
+function Logout(){
+    const navigate = useNavigate()
 
     function logoutFunc(){
         localStorage.removeItem('Token')
-        setLoggedIn(false)
+        navigate("/login")
     }
     return (
         <><button  onClick={() => logoutFunc()} >Logout</button></>

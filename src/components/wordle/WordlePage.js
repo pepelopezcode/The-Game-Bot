@@ -3,7 +3,7 @@ import WordleBoard from './WordleBoard'
 import WordleKeyboard from './WordleKeyboard'
 import Words from './Words';
 
-function WordlePage() {
+function WordlePage({user}) {
     const boardDefault =
         [["", "", "", "", ""],
         ["", "", "", "", ""],
@@ -16,11 +16,11 @@ function WordlePage() {
     const [currentWord, setCurrentWord] = useState({ currentAttempt: 0, currentLetter: 0 })
     const [roundOver, setRoundOver] = useState(false)
     const [onEnterPress, setOnEnterPress] = useState(1)
-    
+
     const [wordAnswer, setWordAnswer] = useState((words[getRandomInt(2315)]).toUpperCase())
     const [score, setScore] = useState(0)
-    
-    
+
+
     console.log(wordAnswer)
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
@@ -49,13 +49,13 @@ function WordlePage() {
             alert("Not Real Word")
         }
         if (wordAnswer === currentWordFull) {
-            setScore(((6 - currentWord.currentAttempt)*100) + score)
+            setScore(((6 - currentWord.currentAttempt) * 100) + score)
             setOnEnterPress(onEnterPress + 1)
-            
+
         }
-        
-        if (currentWord.currentAttempt === 5){
-            
+
+        if (currentWord.currentAttempt === 5) {
+
             setOnEnterPress(onEnterPress + 1)
         }
 
@@ -73,21 +73,31 @@ function WordlePage() {
 
     useEffect(() => {
         if (onEnterPress > 1) {
-            
-            if (currentWord.currentAttempt === 6){
+
+            if (currentWord.currentAttempt === 6) {
                 alert(`Nice Try the correct word was ${wordAnswer}`)
                 setBoard(boardDefault);
                 setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
                 setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
-            } else if (onEnterPress === 6){
+            } else if (onEnterPress === 6) {
                 alert(`gameover final score: ${score}`)
-            }else{
+                fetch('http://localhost:3000/scores', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        score: score,
+                        user_id: user.id
+                    }),
+                })
+            } else {
                 alert('Next Word')
                 setBoard(boardDefault);
                 setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
                 setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
             }
-            
+
         }
 
     }, [onEnterPress])

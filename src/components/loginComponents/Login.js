@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 
 
-function Login({setLoggedIn, setSignupSwitch}){
-
+function Login(){
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -19,8 +20,12 @@ function Login({setLoggedIn, setSignupSwitch}){
             }),
         })
             .then((r) => r.json())
-            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (setLoggedIn(true))) )
+            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/"))) )
             
+    }
+
+    function switchToSignup(){
+        navigate("/signup")
     }
 
 
@@ -44,7 +49,7 @@ function Login({setLoggedIn, setSignupSwitch}){
                     
                     <input type="submit" className="submitButton" />
                 </form>
-                <p onClick={() => setSignupSwitch(true)} >Signup</p>
+                <p onClick={() => switchToSignup()} >Signup</p>
         </>
     )
 }
