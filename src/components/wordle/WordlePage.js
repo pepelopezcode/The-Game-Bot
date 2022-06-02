@@ -122,7 +122,7 @@ function WordlePage({user, score, setScore}) {
 
     return (
         <div>
-            <h1 className="wordlePage" >WordlePage</h1>
+            <h1 className="header">Wordle</h1>
             <p  className="wordlePage">Score:{score}</p>
             <p className="wordlePage">Current Round: {onEnterPress}</p>
             <div className="game" >
