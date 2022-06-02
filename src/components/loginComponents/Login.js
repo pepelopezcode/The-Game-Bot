@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom'
 
 
-function Login(){
+function Login({setNewLogin, newLogin}){
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -20,9 +20,8 @@ function Login(){
             }),
         })
             .then((r) => r.json())
-            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/"))) )
-            
-    }
+            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/")), (setNewLogin(!newLogin)) ))
+        }
 
     function switchToSignup(){
         navigate("/signup")

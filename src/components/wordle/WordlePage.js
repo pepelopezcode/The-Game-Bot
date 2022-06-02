@@ -14,7 +14,6 @@ function WordlePage({user}) {
     const words = Words.words
     const [board, setBoard] = useState(boardDefault)
     const [currentWord, setCurrentWord] = useState({ currentAttempt: 0, currentLetter: 0 })
-    const [roundOver, setRoundOver] = useState(false)
     const [onEnterPress, setOnEnterPress] = useState(1)
 
     const [wordAnswer, setWordAnswer] = useState((words[getRandomInt(2315)]).toUpperCase())

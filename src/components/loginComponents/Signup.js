@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 
 
-function Signup(){
+function Signup({setNewLogin, newLogin}){
     const navigate = useNavigate()
     
     const [username, setUsername] = useState('')
@@ -42,7 +42,7 @@ function Signup(){
             }),
         })
             .then((r) => r.json())
-            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/"))) )
+            .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/")), (setNewLogin(!newLogin))) )
     }
 
     function switchToLogin(){
