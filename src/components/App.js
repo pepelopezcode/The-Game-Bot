@@ -15,6 +15,7 @@ function App() {
   const [newLogin, setNewLogin] = useState(false)
   const [scoreData, setScoreData] = useState([])
   const [score, setScore] = useState(0)
+  const [newScore, setNewScore] = useState(false)
 
   const [globalScoreData, setGlobalScoreData] = useState([])
     const [individualScoreData, setIndividualScoreData] = useState([])
@@ -52,6 +53,15 @@ function App() {
         .then(data => setScoreData(data))
       }, [user])
 
+      useEffect(() => {
+        if (user !== null){
+          fetch("http://localhost:3000/scores")
+            .then(response => response.json())
+            .then(data => setScoreData(data))
+        }
+        
+          }, [newScore])
+
 
 
   return (
@@ -62,7 +72,7 @@ function App() {
           
         <Route exact path="/login" element={<Login setNewLogin={setNewLogin} newLogin={newLogin}  /> } />
           
-        <Route exact path="/wordle" element={<WordlePage user={user} score={score} setScore={setScore} />} />
+        <Route exact path="/wordle" element={<WordlePage user={user} score={score} setScore={setScore} setNewScore={setNewScore} />} />
 
         <Route exact path="/signup" element={<Signup setNewLogin={setNewLogin} newLogin={newLogin} />} />
         

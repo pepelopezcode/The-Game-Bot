@@ -5,7 +5,7 @@ import WordleKeyboard from './WordleKeyboard'
 import Words from './Words';
 import {useNavigate} from 'react-router-dom'
 
-function WordlePage({user, score, setScore}) {
+function WordlePage({user, score, setScore, setNewScore}) {
     const navigate = useNavigate()
     const boardDefault =
         [["", "", "", "", ""],
@@ -110,6 +110,7 @@ function WordlePage({user, score, setScore}) {
                 setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
                 setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
                 setDisabledLetters([])
+                setNewScore((prev) => !prev)
             } else {
                 alert('Next Word')
                 setBoard(boardDefault);
