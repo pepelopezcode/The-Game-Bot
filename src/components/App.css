@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   background-color: #121212;
 
   /* display: flex; */
@@ -18,7 +18,7 @@ nav {
   margin: 0;
   border-bottom: 1px solid grey;
   display: grid;
-  place-items: center;
+  /* place-items: center; */
 }
 
 nav h1 {
@@ -32,7 +32,7 @@ nav h1 {
   height: calc(100vh - 170px);
   display: flex;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 20px;
   flex-direction: column;
 }
 
@@ -121,4 +121,155 @@ nav h1 {
 
 #big {
   width: 100px;
+}
+
+
+
+.login {
+  background: white;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 50px auto;
+  max-width: 700px;
+  padding: 30px 20px ;
+  padding-top: 20px;
+  color: #000000;
+}
+
+input {
+  border: 1px solid #c7c7c7;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+}
+
+label {
+  color: #000000;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.submitButton {
+  background-color: #33ebeb;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 20px 0px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  border-color: #000000;
+}
+
+.switchLogState {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.switchLogState:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #33ebeb;
+}
+
+.card {
+  height: 200px;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  text-decoration: none;
+  border: 4px ;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-image: url('https://dailynorthwestern.com/wp-content/uploads/2022/01/WORDLE-Janna-Lee-900x588.png');
+  background-size:200px;
+  border-radius: 25px;
+}
+
+
+.inner {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  box-sizing: border-box;
+  padding: 40px;
+  border-radius: 25px;
+
+
+}
+
+.title {
+  font-size: 24px;
+  color: black;
+  text-align: center;
+  font-weight: 700;
+  color: #181818;
+  text-shadow: 0px 2px 2px #a6f8d5;
+  position: relative;
+  margin: 0 0 20px 0;
+
+
+}
+
+.scores {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  /* text-align:center; */
+  padding: 1rem 3rem 1rem 3rem;
+  background: #ffffff;
+  max-width: 15%;
+  border-radius: 7px;
+  left: 40%;
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  color: black;
+}
+
+
+.logout {
+  border-radius: 12px;
+  background-color: #33ebeb;
+  color: rgb(5, 2, 2);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 10px 10px 10px 10px;
+  padding: 7px;
+  cursor: pointer
+}
+
+.wordlePage {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gameoverPage {
+  font-size: large;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#gameoverbutton {
+  background-color: #33ebeb;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+}
+#disabled{
+  background-color: #3a393c;
 }

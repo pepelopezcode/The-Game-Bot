@@ -14,12 +14,13 @@ function App() {
   const [user, setUser] = useState(null)
   const [newLogin, setNewLogin] = useState(false)
   const [scoreData, setScoreData] = useState([])
+  const [score, setScore] = useState(0)
 
   const [globalScoreData, setGlobalScoreData] = useState([])
     const [individualScoreData, setIndividualScoreData] = useState([])
 
     useEffect(() => {
-        if ( (scoreData !== [])) {
+        if ( (scoreData !== []) && user !== null) {
             setIndividualScoreData(scoreData.filter(score => score.user.username === user.username))
             setGlobalScoreData(scoreData.slice(0, 5))
         }
@@ -35,7 +36,9 @@ function App() {
       })
         .then(response => response.json())
         .then(data => setUser(data))
+      
       navigate("/")
+      // localStorage.setItem('wordle', JSON.stringify({}))
     }else {
       navigate("/login")
     }
@@ -59,11 +62,11 @@ function App() {
           
         <Route exact path="/login" element={<Login setNewLogin={setNewLogin} newLogin={newLogin}  /> } />
           
-        <Route exact path="/wordle" element={<WordlePage user={user} />} />
+        <Route exact path="/wordle" element={<WordlePage user={user} score={score} setScore={setScore} />} />
 
         <Route exact path="/signup" element={<Signup setNewLogin={setNewLogin} newLogin={newLogin} />} />
         
-        <Route exact path="/gameover" element={<Gameover />} />
+        <Route exact path="/gameover" element={<Gameover score={score} setScore={setScore} />} />
         
       </Routes>
 

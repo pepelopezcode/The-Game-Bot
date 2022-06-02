@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import KeyboardLetter from './KeyboardLetter'
 
-function WordleKeyboard({ onEnter, onDelete, onKeySelect }) {
+function WordleKeyboard({ onEnter, onDelete, onKeySelect, disabledLetters }) {
   const firstRowOfKeys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
   const secondRowOfKeys = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
   const thirdRowOfKeys = ["Z", "X", "C", "V", "B", "N", "M"]
@@ -41,15 +41,15 @@ function WordleKeyboard({ onEnter, onDelete, onKeySelect }) {
   return (
     <div className='keyboard' onKeyDown={(e) => handleKeyboardPress(e)}> 
       <div className='line1'>{firstRowOfKeys.map(keyboardLetter => {
-        return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} />)
+        return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} disabled={disabledLetters.includes(keyboardLetter)}/>)
       })}</div>
       <div className='line2'>{secondRowOfKeys.map(keyboardLetter => {
-        return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} />)
+        return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} disabled={disabledLetters.includes(keyboardLetter)} />)
       })}</div>
       <div className='line3'>
         <KeyboardLetter onDelete={onDelete} keyboardLetter={"DELETE"} />
         {thirdRowOfKeys.map(keyboardLetter => {
-          return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} />)
+          return (<KeyboardLetter onKeySelect={onKeySelect} keyboardLetter={keyboardLetter} key={keyboardLetter} disabled={disabledLetters.includes(keyboardLetter)} />)
         })}
 
         <KeyboardLetter onEnter={onEnter} keyboardLetter={"ENTER"} />

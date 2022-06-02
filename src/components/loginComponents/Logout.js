@@ -10,7 +10,7 @@ function Logout(){
         navigate("/login")
     }
     return (
-        <><button  onClick={() => logoutFunc()} >Logout</button></>
+        <><button  onClick={() => logoutFunc()} className="logout" >Logout</button></>
     )
 }
 

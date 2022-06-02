@@ -8,19 +8,21 @@ function Home({user, scoreData, individualScoreData, globalScoreData}) {
     
     return (
         <>
-            <Logout />
-            <Link to='/wordle' >
-
-                <h3>Wordle</h3>
+            <Logout  />
+            <Link to='/wordle' className="card">
+                <div className="inner">
+                    <h3 className="title" >Wordle</h3>
+                </div>
+                
                 
             </Link>
-            <ol>
-                Your High-Scores:
-                    {individualScoreData !== [] ? individualScoreData.map(score =>{return (<li>Username:{score.user.username}   Score:{score.score}</li>)}) : null}
+            <ol className="scores">
+                <p>Your High-Scores:</p>
+                    {individualScoreData !== [] ? individualScoreData.slice(0, 5).map(score =>{return (<li key={score.created_at} >Username:{score.user.username}   Score:{score.score}</li>)}) : null}
                 </ol>
-                <ol>
-                    Global High-Scores:
-                    {globalScoreData !==[] ? globalScoreData.map(score => {return (<li>Username:{score.user.username}   Score:{score.score}</li>)}) : null}
+                <ol className="scores">
+                    <p>Global High-Scores:</p>
+                    {globalScoreData !==[] ? globalScoreData.map(score => {return (<li key={score.created_at} >Username:{score.user.username}   Score:{score.score}</li>)}) : null}
                 </ol>
         </>
     )

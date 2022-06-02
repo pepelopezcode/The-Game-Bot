@@ -43,6 +43,7 @@ function Signup({setNewLogin, newLogin}){
         })
             .then((r) => r.json())
             .then(data => data.error === 'Invalid email or password'  ? alert(data.error):((localStorage.setItem('Token', data.token)), (navigate("/")), (setNewLogin(!newLogin))) )
+            localStorage.setItem('wordle', JSON.stringify({}))
     }
 
     function switchToLogin(){
@@ -51,7 +52,7 @@ function Signup({setNewLogin, newLogin}){
 
     return(
         <>
-        <form onSubmit={(e) => submitUser(e)} >
+        <form onSubmit={(e) => submitUser(e)} className="login" >
                 <label>Username:
                     <input
                         type="text"
@@ -68,23 +69,23 @@ function Signup({setNewLogin, newLogin}){
                 </label>
                 <label>Password:
                     <input
-                        type="text"
+                        type="password"
                         placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
                 <label>Re-Enter Password:
                     <input
-                        type="text"
+                        type="password"
                         placeholder="Re-Enter Password"
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                     />
                 </label>
 
-                <input type="submit" className="submitButton" />
-                
+                <input type="submit" className="submitButton" value="Signup" />
+                <p onClick={() => switchToLogin()} className="switchLogState" >Already have an account?</p>
             </form>
-            <p onClick={() => switchToLogin()} >Already have an account?</p>
+            
         </>
     )
 }

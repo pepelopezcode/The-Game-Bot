@@ -1,6 +1,6 @@
 import React from 'react'
 
-function KeyboardLetter({keyboardLetter, onEnter, onDelete, onKeySelect}) {
+function KeyboardLetter({keyboardLetter, onEnter, onDelete, onKeySelect, disabled}) {
 
     function onKeyClick(){
         if (keyboardLetter === "ENTER"){
@@ -13,7 +13,7 @@ function KeyboardLetter({keyboardLetter, onEnter, onDelete, onKeySelect}) {
     }
     
   return (
-    <div className="key" id={keyboardLetter === "ENTER" || keyboardLetter === "DELETE" ? "big" : null} onClick={onKeyClick} >{keyboardLetter}</div>
+    <div className="key" id={keyboardLetter === "ENTER" || keyboardLetter === "DELETE" ? "big" : disabled && 'disabled'} onClick={onKeyClick} >{keyboardLetter}</div>
   )
 }
 

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+
 import WordleBoard from './WordleBoard'
 import WordleKeyboard from './WordleKeyboard'
 import Words from './Words';
+import {useNavigate} from 'react-router-dom'
 
-function WordlePage({user}) {
+function WordlePage({user, score, setScore}) {
+    const navigate = useNavigate()
     const boardDefault =
         [["", "", "", "", ""],
         ["", "", "", "", ""],
@@ -17,10 +20,11 @@ function WordlePage({user}) {
     const [onEnterPress, setOnEnterPress] = useState(1)
 
     const [wordAnswer, setWordAnswer] = useState((words[getRandomInt(2315)]).toUpperCase())
-    const [score, setScore] = useState(0)
+    const [allWordleInfo, setAllWordleInfo] = useState({})
+    const [disabledLetters, setDisabledLetters] = useState([])
+    
 
 
-    console.log(wordAnswer)
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
@@ -32,7 +36,7 @@ function WordlePage({user}) {
         setBoard(newBoard)
         setCurrentWord({ ...currentWord, currentLetter: currentWord.currentLetter + 1 })
     }
-
+    
     function onEnter() {
         if (currentWord.currentLetter !== 5) return;
 
@@ -44,6 +48,13 @@ function WordlePage({user}) {
 
         if (words.includes(currentWordFull.toLocaleLowerCase())) {
             setCurrentWord({ currentAttempt: currentWord.currentAttempt + 1, currentLetter: 0 })
+            setAllWordleInfo({
+                'board': board,
+                'currentAttempt': currentWord,
+                'round': onEnterPress,
+                'totallyNotAnswer': wordAnswer,
+                'score': score
+            })
         } else {
             alert("Not Real Word")
         }
@@ -68,9 +79,14 @@ function WordlePage({user}) {
         setCurrentWord({ ...currentWord, currentLetter: currentWord.currentLetter - 1 })
 
     }
+    //just for demonstration purposes
+    useEffect(() => {
+        console.log(wordAnswer)
+    },[wordAnswer])
 
 
     useEffect(() => {
+        
         if (onEnterPress > 1) {
 
             if (currentWord.currentAttempt === 6) {
@@ -79,7 +95,7 @@ function WordlePage({user}) {
                 setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
                 setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
             } else if (onEnterPress === 6) {
-                alert(`gameover final score: ${score}`)
+                navigate("/gameover")
                 fetch('http://localhost:3000/scores', {
                     method: 'POST', 
                     headers: {
@@ -90,6 +106,9 @@ function WordlePage({user}) {
                         user_id: user.id
                     }),
                 })
+                setBoard(boardDefault);
+                setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
+                setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
             } else {
                 alert('Next Word')
                 setBoard(boardDefault);
@@ -103,13 +122,14 @@ function WordlePage({user}) {
 
     return (
         <div>
-            <h1>WordlePage</h1>
-            <p>Score:{score}</p>
+            <h1 className="wordlePage" >WordlePage</h1>
+            <p  className="wordlePage">Score:{score}</p>
+            <p className="wordlePage">Current Round: {onEnterPress}</p>
             <div className="game" >
-                <WordleBoard board={board} currentWord={currentWord} wordAnswer={wordAnswer} />
-                <WordleKeyboard onEnter={onEnter} onDelete={onDelete} onKeySelect={onKeySelect} />
+                <WordleBoard board={board} currentWord={currentWord} wordAnswer={wordAnswer} disabledLetters={disabledLetters} setDisabledLetters={setDisabledLetters} />
+                <WordleKeyboard onEnter={onEnter} onDelete={onDelete} onKeySelect={onKeySelect} disabledLetters={disabledLetters} />
             </div>
-
+            
         </div>
     )
 }
