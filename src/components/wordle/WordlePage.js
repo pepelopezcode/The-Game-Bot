@@ -109,11 +109,13 @@ function WordlePage({user, score, setScore}) {
                 setBoard(boardDefault);
                 setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
                 setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
+                setDisabledLetters([])
             } else {
                 alert('Next Word')
                 setBoard(boardDefault);
                 setCurrentWord({ currentAttempt: 0, currentLetter: 0 })
                 setWordAnswer((words[getRandomInt(2315)]).toUpperCase())
+                setDisabledLetters([])
             }
 
         }
