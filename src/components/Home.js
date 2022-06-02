@@ -9,6 +9,7 @@ function Home({user, scoreData, individualScoreData, globalScoreData}) {
     return (
         <>
             <Logout  />
+            <h1 className="header">Wordle</h1>
             <Link to='/wordle' className="card">
                 <div className="inner">
                     <h3 className="title" >Wordle</h3>
